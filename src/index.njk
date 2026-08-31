@@ -1,151 +1,121 @@
 ---
 layout: base.njk
-title: DeepWhiteX — 奔赴未知，持续探索
-description: DeepWhiteX 是一个关于宇宙探索、未知远航与理性克制的科幻主题空间。
-heroHideHeader: true
+title: Sumora — 一个关于夏天的个人域名
+description: Sumora 是作者的个人域名，因喜爱夏天而得名，用来放一些实验项目、子域名和随手写下的东西。
 ---
 
 <section class="hero" id="top">
   <div class="hero-orbit" aria-hidden="true">
     <svg viewBox="0 0 1000 1000" class="orbit-system">
       <defs>
-        <linearGradient id="orbitGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="rgba(196,184,206,0.35)" />
-          <stop offset="50%" stop-color="rgba(196,184,206,0.05)" />
-          <stop offset="100%" stop-color="rgba(184,168,200,0.25)" />
+        <linearGradient id="horizonGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="rgba(242,196,106,0)" />
+          <stop offset="55%" stop-color="rgba(232,154,140,0.14)" />
+          <stop offset="100%" stop-color="rgba(122,156,168,0.24)" />
         </linearGradient>
-        <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stop-color="rgba(196,184,206,0.18)" />
-          <stop offset="60%" stop-color="rgba(196,184,206,0.03)" />
+        <radialGradient id="sunGlow" cx="50%" cy="62%" r="50%">
+          <stop offset="0%" stop-color="rgba(242,196,106,0.38)" />
+          <stop offset="45%" stop-color="rgba(232,154,140,0.1)" />
           <stop offset="100%" stop-color="transparent" />
         </radialGradient>
       </defs>
-      <circle cx="500" cy="500" r="280" fill="none" stroke="url(#orbitGrad)" stroke-width="1" opacity="0.4" />
-      <circle cx="500" cy="500" r="380" fill="none" stroke="url(#orbitGrad)" stroke-width="0.8" opacity="0.25" />
-      <circle cx="500" cy="500" r="460" fill="none" stroke="url(#orbitGrad)" stroke-width="0.6" opacity="0.15" />
-      <circle cx="500" cy="500" r="120" fill="url(#coreGlow)" />
-      <circle cx="500" cy="220" r="4" fill="rgba(232,238,245,0.7)" />
-      <circle cx="500" cy="120" r="2.5" fill="rgba(196,184,206,0.8)" />
-      <path d="M500 220 L500 120" stroke="rgba(196,184,206,0.12)" stroke-width="1" />
-      <ellipse cx="500" cy="500" rx="180" ry="60" fill="none" stroke="rgba(184,168,200,0.15)" stroke-width="1" transform="rotate(-15 500 500)" />
+      <!-- 落日余晖 — 移至右侧，作为拍立得的背景 -->
+      <circle cx="780" cy="520" r="360" fill="url(#sunGlow)" />
+      <circle cx="780" cy="520" r="150" fill="rgba(242,196,106,0.16)" />
+      <!-- 海平线波纹，随太阳上移 -->
+      <path d="M80 520 Q 300 470 500 520 T 960 520" fill="none" stroke="rgba(232,154,140,0.28)" stroke-width="1.2" />
+      <path d="M40 565 Q 280 510 500 565 T 960 565" fill="none" stroke="rgba(122,156,168,0.2)" stroke-width="1" />
+      <path d="M120 605 Q 340 560 500 605 T 950 605" fill="none" stroke="rgba(122,156,168,0.13)" stroke-width="0.8" />
+      <!-- 柔光射线，从太阳中心散出 -->
+      <line x1="780" y1="520" x2="780" y2="60" stroke="rgba(242,196,106,0.08)" stroke-width="1" />
+      <line x1="780" y1="520" x2="1000" y2="140" stroke="rgba(242,196,106,0.06)" stroke-width="1" />
+      <line x1="780" y1="520" x2="1000" y2="320" stroke="rgba(242,196,106,0.05)" stroke-width="1" />
+      <line x1="780" y1="520" x2="620" y2="720" stroke="rgba(242,196,106,0.05)" stroke-width="1" />
+      <line x1="780" y1="520" x2="560" y2="300" stroke="rgba(242,196,106,0.04)" stroke-width="1" />
     </svg>
   </div>
 
   <div class="hero-content">
-
-    <h1 class="hero-title">
-      <span class="title-word title-deep">Deep</span>
-      <span class="title-word title-white">White</span>
-      <span class="title-word title-x">X</span>
-    </h1>
-
+    <div class="hero-left">
+      <h1 class="hero-title">Sumora</h1>
+    </div>
+    <div class="polaroid-stack">
+      <figure class="hero-image back" aria-hidden="true"><img alt="" decoding="async" loading="lazy"></figure>
+      <figure class="hero-image mid" aria-hidden="true"><img alt="" decoding="async" loading="lazy"></figure>
+      <figure class="hero-image front"><img alt="夏日拍立得" decoding="async"></figure>
+    </div>
   </div>
-</section>
 
-<section class="lead" id="lead">
-  <p class="lead-text">
-    这里曾停泊我的个人博客，<br>
-    但 DeepWhiteX 并非适合日常琐碎。
-  </p>
+  <script>
+    // 拍立得堆叠：打开时随机抽照片，点击整叠往前轮换一张；只用项目内照片，不足的层直接不显示
+    (function () {
+      var photos = {{ polaroid | dump | safe }};
+      var srcs = photos.slice();
+      var cursor = srcs.length > 0 ? Math.floor(Math.random() * srcs.length) : 0;
+      var imgs = document.querySelectorAll(".polaroid-stack img"); // 顺序: back, mid, front
+      var stack = document.querySelector(".polaroid-stack");
 
-  <div class="lead-actions">
-    <!--
-    <a href="" class="btn btn-primary">也许</a>
-    <a href="" class="btn btn-ghost">可以干点别的</a>
-    -->
-  </div>
+      function apply() {
+        // 本地照片优先给最上层 front；照片不够的层直接隐藏
+        [imgs[2], imgs[1], imgs[0]].forEach(function (img, k) {
+          var figure = img.parentNode;
+          if (k < srcs.length) {
+            img.src = srcs[(cursor + k) % srcs.length];
+            figure.style.display = "";
+          } else {
+            img.removeAttribute("src");
+            figure.style.display = "none";
+          }
+        });
+      }
+
+      apply();
+
+      if (stack) {
+        // 点击整叠：往前轮换一张，并触发一次翻片动画
+        stack.addEventListener("click", function () {
+          if (!srcs.length) return;
+          cursor = (cursor + 1) % srcs.length;
+          apply();
+          stack.classList.remove("switch-anim");
+          void stack.offsetWidth; // 强制回流以重启动画
+          stack.classList.add("switch-anim");
+        });
+      }
+    })();
+  </script>
 </section>
 
 <section class="mission" id="mission">
-  <h2>申请免费域名</h2>
-  <p>一份在线简历、一个作品集，只有在对方能顺利打开时才有意义。我经历过 Cloudflare 在关键时刻抽风的窘迫，所以如果你需要一个更稳定的地址，可以发邮件说明用途。</p>
-  <p>我会给你一个已备案的二级域名 xxx.deepwhitex.com，免费用于作品集、临时项目或在线简历。</p>
+  <div class="section-head">
+    <span class="section-index">APPLY FOR ONE</span>
+    <h2 class="section-title">need one?</h2>
+  </div>
+  <p>若你需要一枚稳定的二级域名来承载作品集、博客或临时项目，说明用途即可。我会为你备好一个已备案的 <strong>xxx.sumora.cn</strong>，不收取任何费用。</p>
+  <p>不用想得太远，先写下你想做的事。</p>
   <div class="apply-row">
-    <input type="text" id="applyReason" class="apply-input" placeholder="简单说明用途，如个人作品集、博客等" autocomplete="off">
+    <input type="text" id="applyReason" class="apply-input" placeholder="简单说明用途，如个人作品集、博客、旅行记录站等" autocomplete="off">
     <button id="applyBtn" class="btn btn-mail">发送邮件申请</button>
   </div>
 </section>
 
-<section class="projects" id="projects">
+<section class="subdomains" id="subdomains">
   <div class="section-head">
-    <h2 class="section-title">实验</h2>
-    <p class="section-desc">技术试验与实测记录。</p>
+    <span class="section-index">SUMMER DOMAINS</span>
+    <h2 class="section-title">in summer</h2>
   </div>
-
-  <ul class="site-list">
-    <li class="site-list-item">
-      <a href="/dwxcmt/">
-        <h4>dwx 评论系统测试报告</h4>
-        <p>自托管评论系统的实测压测数据与结论</p>
-      </a>
+  <ul class="subdomain-list">
+    <li class="subdomain-list-item">
+      <span class="subdomain-list-name">sea.sumora.cn</span>
+      <span class="subdomain-list-meta">夏日之海 · 旅行、冲浪、海滨度假</span>
+    </li>
+    <li class="subdomain-list-item">
+      <span class="subdomain-list-name">sun.sumora.cn</span>
+      <span class="subdomain-list-meta">夏日阳光 · 户外、摄影、生活方式</span>
+    </li>
+    <li class="subdomain-list-item">
+      <span class="subdomain-list-name">wind.sumora.cn</span>
+      <span class="subdomain-list-meta">夏日微风 · 帆船、露营、自然</span>
     </li>
   </ul>
 </section>
-
-<section class="explore" id="explore">
-  <div class="section-head">
-    <h2 class="section-title">已知站点</h2>
-  </div>
-
-  <div class="explore-visual" aria-hidden="true">
-    <svg viewBox="0 0 1200 240" class="trajectory">
-      <defs>
-        <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="rgba(196,184,206,0)" />
-          <stop offset="20%" stop-color="rgba(196,184,206,0.35)" />
-          <stop offset="80%" stop-color="rgba(184,168,200,0.35)" />
-          <stop offset="100%" stop-color="rgba(184,168,200,0)" />
-        </linearGradient>
-      </defs>
-      <path d="M50 180 C 300 180, 400 60, 600 120 S 900 40, 1150 120" fill="none" stroke="url(#lineGrad)" stroke-width="1.2" />
-      <circle cx="50" cy="180" r="3" fill="rgba(232,238,245,0.6)" />
-      <circle cx="600" cy="120" r="4" fill="rgba(196,184,206,0.8)" />
-      <circle cx="1150" cy="120" r="3" fill="rgba(184,168,200,0.6)" />
-      <path d="M1120 105 L1160 115 L1120 125 Z" fill="rgba(232,238,245,0.25)" />
-    </svg>
-  </div>
-
-  <ul class="site-list">
-    <li class="site-list-item">
-      <a href="https://julian.deepwhitex.com" target="_blank" rel="noopener noreferrer">
-        <h4>Julian’s Journal</h4>
-        <p>Keep writing, keep learning.</p>
-      </a>
-    </li>
-    <li class="site-list-item">
-      <a href="https://lyy.deepwhitex.com" target="_blank" rel="noopener noreferrer">
-        <h4>lyy的作品集</h4>
-        <p>数字媒体技术</p>
-      </a>
-    </li>
-    <li class="site-list-item">
-      <a href="https://snowfox.deepwhitex.com" target="_blank" rel="noopener noreferrer">
-        <h4>snowfox</h4>
-        <p>snowfox导航站</p>
-      </a>
-    </li>
-    <li class="site-list-item">
-      <a href="#" aria-disabled="true">
-        <h4>未知节点</h4>
-        <p>坐标尚未公开，下一个站点由你决定。</p>
-      </a>
-    </li>
-  </ul>
-</section>
-
-<section class="friends" id="friends">
-  <div class="section-head">
-    <h2 class="section-title">友情链接</h2>
-  </div>
-
-  <ul class="site-list">
-    <li class="site-list-item">
-      <a href="https://www.travellings.cn/go.html" target="_blank" rel="noopener noreferrer">
-        <h4>开往 Travellings</h4>
-        <p>互联网开往 · 友链接力</p>
-      </a>
-    </li>
-  </ul>
-</section>
-
-

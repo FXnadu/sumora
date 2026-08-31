@@ -7,6 +7,24 @@ module.exports = function (eleventyConfig) {
     return new Date().getFullYear().toString();
   });
 
+  // 扫描拍立得图片文件夹，供 hero 随机展示（往文件夹放图后重新构建即自动生效）
+  eleventyConfig.addGlobalData("polaroid", () => {
+    const fs = require("fs");
+    const path = require("path");
+    const dir = path.join(__dirname, "src", "assets", "images", "polaroid");
+    const exts = [".jpg", ".jpeg", ".png", ".webp", ".gif", ".avif", ".svg"];
+    let files = [];
+    try {
+      files = fs
+        .readdirSync(dir)
+        .filter((f) => exts.includes(path.extname(f).toLowerCase()))
+        .sort();
+    } catch (e) {
+      files = [];
+    }
+    return files.map((f) => "/assets/images/polaroid/" + encodeURIComponent(f));
+  });
+
   return {
     dir: {
       input: "src",
