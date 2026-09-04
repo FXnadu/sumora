@@ -138,7 +138,7 @@
       const body = encodeURIComponent(
         reason ? `我想申请一个二级域名，用途如下：\n${reason}` : "我想申请一个二级域名。"
       );
-      window.location.href = `mailto:hi@sumora.cn?subject=${subject}&body=${body}`;
+      window.location.href = `mailto:deepwhitex@qq.com?subject=${subject}&body=${body}`;
     }
 
     btn.addEventListener("click", send);
